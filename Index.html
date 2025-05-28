@@ -7,92 +7,87 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #2d572c; /* dark green */
+      background: #f5f7f3;
       margin: 0;
-      padding: 0 1rem 3rem 1rem;
-      min-height: 100vh;
+      padding: 0;
+      color: #333;
     }
     header {
-      background: #4caf50; /* green */
+      background: #2e7d32; /* deep green */
       color: white;
-      padding: 1.5rem 1rem;
       text-align: center;
-      font-size: 2rem;
+      padding: 1rem;
+      font-size: 1.8rem;
       font-weight: bold;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-      margin-bottom: 1rem;
+      letter-spacing: 1.5px;
     }
-    section {
-      border: 2px solid #4caf50;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 8px rgba(76,175,80,0.15);
+    nav {
+      display: flex;
+      background: #fbc02d; /* yellow */
+      justify-content: center;
     }
-    section h2 {
-      color: #4caf50;
-      margin-bottom: 1rem;
-      text-align: center;
-      font-size: 1.6rem;
-      letter-spacing: 0.03em;
+    nav button {
+      background: none;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: #2e7d32;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s;
     }
-    .btn-group {
+    nav button.active {
+      border-bottom: 3px solid #2e7d32;
+    }
+    main {
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .mode-buttons {
+      margin-top: 2rem;
       display: flex;
       justify-content: center;
       gap: 1.5rem;
-      flex-wrap: wrap;
     }
-    button {
-      background-color: #ffeb3b; /* yellow */
-      color: #2d572c;
+    .mode-buttons button {
+      background: #2e7d32;
+      color: white;
       border: none;
       padding: 1rem 2rem;
-      font-weight: 700;
+      border-radius: 6px;
       font-size: 1.1rem;
-      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-      transition: background-color 0.3s ease;
-      min-width: 140px;
+      transition: background 0.3s ease;
     }
-    button:hover {
-      background-color: #fdd835;
+    .mode-buttons button:hover {
+      background: #1b4d20;
     }
-    footer {
-      background: #4caf50;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-    /* WhatsApp floating button */
+    /* WhatsApp button */
     #whatsapp-btn {
       position: fixed;
-      bottom: 70px;
+      bottom: 20px;
       right: 20px;
-      background-color: #25d366;
-      border-radius: 50%;
+      background: #25d366;
       width: 60px;
       height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
       display: flex;
-      align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      align-items: center;
       cursor: pointer;
       z-index: 1000;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s ease;
     }
     #whatsapp-btn:hover {
-      background-color: #1ebe57;
+      background: #128c4a;
     }
-    #whatsapp-btn img {
-      width: 35px;
-      height: 35px;
+    #whatsapp-btn svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
     }
   </style>
 </head>
@@ -100,59 +95,60 @@
 
   <header>DNST Exam Prep</header>
 
+  <nav>
+    <button id="tab-delsu" class="active">Delsu</button>
+    <button id="tab-uniben">Uniben</button>
+    <button id="tab-nursing">School of Nursing</button>
+  </nav>
+
   <main>
-
-    <section id="delsu">
-      <h2>DELSU</h2>
-      <div class="btn-group">
-        <button onclick="startPractice('delsu')">Practice Mode</button>
-        <button onclick="startExam('delsu')">Exam Mode</button>
+    <section id="content-delsu" class="tab-content">
+      <h2>Delsu Practice & Exam Modes</h2>
+      <div class="mode-buttons">
+        <button onclick="alert('Delsu Practice Mode coming soon!')">Practice Mode</button>
+        <button onclick="alert('Delsu Exam Mode coming soon!')">Exam Mode</button>
       </div>
     </section>
 
-    <section id="uniben">
-      <h2>UNIBEN</h2>
-      <div class="btn-group">
-        <button onclick="startPractice('uniben')">Practice Mode</button>
-        <button onclick="startExam('uniben')">Exam Mode</button>
+    <section id="content-uniben" class="tab-content" style="display:none;">
+      <h2>Uniben Practice & Exam Modes</h2>
+      <div class="mode-buttons">
+        <button onclick="alert('Uniben Practice Mode coming soon!')">Practice Mode</button>
+        <button onclick="alert('Uniben Exam Mode coming soon!')">Exam Mode</button>
       </div>
     </section>
 
-    <section id="son">
-      <h2>School of Nursing</h2>
-      <div class="btn-group">
-        <button onclick="startPractice('son')">Practice Mode</button>
-        <button onclick="startExam('son')">Exam Mode</button>
+    <section id="content-nursing" class="tab-content" style="display:none;">
+      <h2>School of Nursing Practice & Exam Modes</h2>
+      <div class="mode-buttons">
+        <button onclick="alert('School of Nursing Practice Mode coming soon!')">Practice Mode</button>
+        <button onclick="alert('School of Nursing Exam Mode coming soon!')">Exam Mode</button>
       </div>
     </section>
-
   </main>
 
-  <footer>© 2025 DNST Exam Prep. All rights reserved.</footer>
-
-  <a
-    href="https://wa.me/yourwhatsappnumber"
-    target="_blank"
-    rel="noopener"
-    id="whatsapp-btn"
-    aria-label="Chat on WhatsApp"
-  >
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-      alt="WhatsApp"
-    />
+  <a href="https://wa.me/2349156478004" target="_blank" id="whatsapp-btn" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.52 3.48a11.93 11.93 0 0 0-16.9 0 11.88 11.88 0 0 0-3.44 8.36 11.85 11.85 0 0 0 1.98 6.31l-1.5 5.46 5.6-1.46a11.85 11.85 0 0 0 6.1 1.52h.02a11.9 11.9 0 0 0 8.35-3.45 11.93 11.93 0 0 0 0-16.9zm-7.6 15.65c-1.72 0-3.44-.52-4.9-1.5l-.35-.21-3.32.87.9-3.25-.23-.35a7.24 7.24 0 0 1-1.14-4.17 7.33 7.33 0 0 1 12.62-5.12 7.25 7.25 0 0 1-5.68 12.37zm3.2-4.9c-.17-.09-1-.5-1.15-.55-.15-.05-.27-.08-.38.09-.12.16-.46.55-.56.66-.1.1-.2.11-.37.04-.17-.07-.7-.26-1.33-.82-.49-.44-.82-.99-.92-1.16-.1-.16-.01-.24.07-.33.07-.07.17-.18.26-.27.09-.09.12-.16.18-.27.06-.11.03-.21-.01-.3-.05-.1-.38-.91-.52-1.25-.14-.32-.28-.27-.38-.27-.1 0-.21 0-.32 0-.11 0-.28.11-.43.26-.15.15-.58.57-.58 1.4 0 .83.59 1.63.67 1.74.08.1 1.16 1.8 2.8 2.53.39.17.69.27.93.35.39.13.74.11 1.02.07.31-.05 1-.4 1.14-.79.14-.38.14-.71.1-.79-.05-.08-.15-.13-.32-.22z"/>
+    </svg>
   </a>
 
   <script>
-    function startPractice(school) {
-      alert(`Starting Practice Mode for ${school.toUpperCase()}`);
-      // TODO: Replace alert with actual navigation or loading practice quiz logic
-    }
+    const tabs = document.querySelectorAll('nav button');
+    const contents = document.querySelectorAll('.tab-content');
 
-    function startExam(school) {
-      alert(`Starting Exam Mode for ${school.toUpperCase()}`);
-      // TODO: Replace alert with actual navigation or loading exam quiz logic
-    }
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        tabs.forEach(t => t.classList.remove('active'));
+        // Hide all content
+        contents.forEach(c => c.style.display = 'none');
+
+        // Activate clicked tab & show content
+        tab.classList.add('active');
+        contents[idx].style.display = 'block';
+      });
+    });
   </script>
 
 </body>
