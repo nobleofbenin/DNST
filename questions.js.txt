@@ -1,0 +1,13 @@
+const questions = [
+  {
+    question: "What is the chemical symbol for water?",
+    options: ["H2O", "O2", "CO2", "NaCl"],
+    answer: "H2O"
+  },
+  {
+    question: "What planet is known as the Red Planet?",
+    options: ["Earth", "Mars", "Jupiter", "Venus"],
+    answer: "Mars"
+  },
+  // Add more questions here in the same format
+];
