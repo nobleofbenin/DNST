@@ -1,69 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>MCQ Practice</title>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCQ Practice</title>
   <style>
-    button {
-      margin: 4px;
-      padding: 10px;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
     }
-    button:disabled {
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #question-text {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    #options button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #eee;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #options button:hover:not(:disabled) {
+      background-color: #d0e6ff;
+    }
+
+    #options button:disabled {
       background-color: #ccc;
       cursor: not-allowed;
     }
+
+    #result {
+      font-size: 18px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
     #explanation {
-      margin-top: 10px;
       font-style: italic;
-      color: #444;
+      margin-top: 10px;
+      color: #666;
+    }
+
+    button#next-btn {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button#next-btn:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>MCQ Practice</h1>
-  <div id="quiz-box">
+  <div class="container">
+    <h1>MCQ Practice</h1>
     <p id="question-text"></p>
     <div id="options"></div>
     <p id="result"></p>
     <p id="explanation"></p>
-    <button onclick="loadQuestion()">Next Question</button>
+    <button id="next-btn" onclick="loadQuestion()">Next Question</button>
   </div>
 
   <script src="questions.js"></script>
   <script>
     let answered = false;
+    let currentQuestion = null;
 
     function loadQuestion() {
       answered = false;
       const randomIndex = Math.floor(Math.random() * questions.length);
-      const question = questions[randomIndex];
-      const questionText = document.getElementById("question-text");
+      currentQuestion = questions[randomIndex];
+
+      document.getElementById("question-text").textContent = currentQuestion.question;
       const optionsDiv = document.getElementById("options");
-      const resultDiv = document.getElementById("result");
-      const explanationDiv = document.getElementById("explanation");
-
-      questionText.textContent = question.question;
       optionsDiv.innerHTML = "";
-      resultDiv.textContent = "";
-      explanationDiv.textContent = "";
+      document.getElementById("result").textContent = "";
+      document.getElementById("explanation").textContent = "";
 
-      question.options.forEach(option => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.onclick = () => {
-          if (!answered) {
-            answered = true;
-            const isCorrect = option === question.correctAnswer;
-            resultDiv.textContent = isCorrect ? "✅ Correct!" : "❌ Wrong!";
-            explanationDiv.textContent = "Explanation: " + question.explanation;
-
-            // Disable all buttons after answer
-            const allButtons = optionsDiv.querySelectorAll("button");
-            allButtons.forEach(btn => btn.disabled = true);
-          }
-        };
-        optionsDiv.appendChild(button);
+      currentQuestion.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => handleAnswer(option, btn);
+        optionsDiv.appendChild(btn);
       });
+    }
+
+    function handleAnswer(selectedOption, button) {
+      if (answered) return;
+      answered = true;
+
+      const buttons = document.querySelectorAll("#options button");
+      buttons.forEach(btn => btn.disabled = true);
+
+      const isCorrect = selectedOption === currentQuestion.correctAnswer;
+      document.getElementById("result").textContent = isCorrect ? "✅ Correct!" : "❌ Wrong!";
+      document.getElementById("explanation").textContent = "Explanation: " + currentQuestion.explanation;
     }
 
     window.onload = loadQuestion;
