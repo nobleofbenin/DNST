@@ -1,12 +1,43 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
   <title>MCQ Practice</title>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
 </head>
 <body>
-  <h1>Welcome to the MCQ Practice Site</h1>
-  <p>This site will let you practice 500 multiple-choice questions!</p>
+  <h1>MCQ Practice</h1>
+  <div id="quiz-box">
+    <p id="question-text"></p>
+    <div id="options"></div>
+    <p id="result"></p>
+    <button onclick="loadQuestion()">Next Question</button>
+  </div>
+
+  <script src="questions.js"></script>
+  <script>
+    function loadQuestion() {
+      const randomIndex = Math.floor(Math.random() * questions.length);
+      const question = questions[randomIndex];
+      const questionText = document.getElementById("question-text");
+      const optionsDiv = document.getElementById("options");
+      const resultDiv = document.getElementById("result");
+
+      questionText.textContent = question.question;
+      optionsDiv.innerHTML = "";
+      resultDiv.textContent = "";
+
+      question.options.forEach(option => {
+        const button = document.createElement("button");
+        button.textContent = option;
+        button.onclick = () => {
+          resultDiv.textContent = option === question.correctAnswer ? "✅ Correct!" : "❌ Wrong!";
+        };
+        optionsDiv.appendChild(button);
+      });
+    }
+
+    // Load the first question on page load
+    window.onload = loadQuestion;
+  </script>
 </body>
 </html>
