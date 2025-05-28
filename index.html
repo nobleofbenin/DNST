@@ -1,18 +1,207 @@
-<!-- Timer Display -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DNST 2025 DELSU POST UTME ONLINE CLASS - Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    #timer {
+      font-size: 1.2em;
+      color: #e74c3c;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    #progressBar {
+      width: 100%;
+      height: 20px;
+      margin-bottom: 20px;
+    }
+    #question {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+    .options li {
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+    #results {
+      display: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>DNST 2025 DELSU POST UTME ONLINE CLASS - Quiz</h1>
+</header>
+
 <div id="timer">Time Remaining: <span id="time">60</span> seconds</div>
+<progress id="progressBar" value="0" max="100"></progress>
+
+<div id="quiz-container">
+  <div id="question">Loading question...</div>
+  <ul class="options" id="options"></ul>
+  <button id="nextBtn" disabled>Next</button>
+</div>
+
+<div id="results">
+  <h2>Your Score: <span id="score"></span></h2>
+  <button id="restartBtn">Try Again</button>
+</div>
 
 <script>
+  const questions = [
+    {
+      question: "What does DNST stand for?",
+      options: ["Department of Natural Sciences and Technology", "Dr Noble Science Tutorial", "Delta National Science Team", "Department of Nutrition and Science Teaching"],
+      answer: 1
+    },
+    {
+      question: "What color scheme is preferred for the DNST website?",
+      options: ["Red, White, Blue", "Green, White, Yellow", "Black, White, Grey", "Purple, Orange, White"],
+      answer: 1
+    },
+    {
+      question: "When do the free DNST classes start?",
+      options: ["Friday, May 30", "Monday, June 1", "Saturday, May 25", "Sunday, June 10"],
+      answer: 0
+    },
+    // Add more questions here
+  ];
+
+  let currentQuestionIndex = 0;
+  let score = 0;
   let timeLeft = 60;
+  let timerInterval;
+
   const timerElement = document.getElementById('time');
-  
-  const timer = setInterval(() => {
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      alert("Time's up!");
-      // Optionally, submit the quiz or move to the next question
-    } else {
+  const progressBar = document.getElementById('progressBar');
+  const questionElement = document.getElementById('question');
+  const optionsElement = document.getElementById('options');
+  const nextBtn = document.getElementById('nextBtn');
+  const resultsContainer = document.getElementById('results');
+  const scoreElement = document.getElementById('score');
+  const quizContainer = document.getElementById('quiz-container');
+  const restartBtn = document.getElementById('restartBtn');
+
+  function startTimer() {
+    timeLeft = 60;
+    timerElement.textContent = timeLeft;
+    timerInterval = setInterval(() => {
       timeLeft--;
       timerElement.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        alert("Time's up! Moving to next question.");
+        nextQuestion();
+      }
+    }, 1000);
+  }
+
+  function loadQuestion() {
+    startTimer();
+    nextBtn.disabled = true;
+
+    const currentQ = questions[currentQuestionIndex];
+    questionElement.textContent = currentQ.question;
+    optionsElement.innerHTML = '';
+
+    currentQ.options.forEach((option, index) => {
+      const li = document.createElement('li');
+      const radioInput = document.createElement('input');
+      radioInput.type = 'radio';
+      radioInput.name = 'option';
+      radioInput.id = 'option' + index;
+      radioInput.value = index;
+
+      radioInput.addEventListener('change', () => {
+        nextBtn.disabled = false;
+      });
+
+      const label = document.createElement('label');
+      label.htmlFor = 'option' + index;
+      label.textContent = option;
+
+      li.appendChild(radioInput);
+      li.appendChild(label);
+      optionsElement.appendChild(li);
+    });
+
+    progressBar.value = (currentQuestionIndex / questions.length) * 100;
+  }
+
+  function nextQuestion() {
+    clearInterval(timerInterval);
+    const selectedOption = document.querySelector('input[name="option"]:checked');
+    if (selectedOption) {
+      if (parseInt(selectedOption.value) === questions[currentQuestionIndex].answer) {
+        score++;
+      }
     }
-  }, 1000);
+
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < questions.length) {
+      loadQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  function showResults() {
+    quizContainer.style.display = 'none';
+    resultsContainer.style.display = 'block';
+    scoreElement.textContent = `${score} / ${questions.length}`;
+    progressBar.value = 100;
+  }
+
+  nextBtn.addEventListener('click', nextQuestion);
+  restartBtn.addEventListener('click', () => {
+    currentQuestionIndex = 0;
+    score = 0;
+    quizContainer.style.display = 'block';
+    resultsContainer.style.display = 'none';
+    progressBar.value = 0;
+    loadQuestion();
+  });
+
+  // Load first question on page load
+  loadQuestion();
 </script>
+
+</body>
+</html>
