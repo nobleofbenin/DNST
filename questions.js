@@ -1,0 +1,13 @@
+const questions = [
+  {
+    question: "What is the capital of France?",
+    options: ["London", "Paris", "Berlin", "Madrid"],
+    correctAnswer: "Paris"
+  },
+  {
+    question: "Which gas do plants use for photosynthesis?",
+    options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    correctAnswer: "Carbon Dioxide"
+  }
+  // Add more questions here...
+];
