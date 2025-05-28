@@ -1,431 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>DNST Post UTME Practice & Exam</title>
-<style>
-  /* Base and reset */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f7f9fc;
-    color: #2c3e50;
-    margin: 0; padding: 0;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-  }
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  header h1 {
-    font-weight: 700;
-    font-size: 2.2rem;
-    color: #27ae60;
-  }
-
-  /* Mode and school tabs */
-  .tab-group {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .tab {
-    padding: 10px 25px;
-    cursor: pointer;
-    font-weight: 600;
-    color: #555;
-    border-bottom: 4px solid transparent;
-    border-radius: 6px 6px 0 0;
-    background-color: #e0e8ef;
-    transition: all 0.3s ease;
-    user-select: none;
-  }
-  .tab.active {
-    color: white;
-    background-color: #27ae60;
-    border-color: #27ae60;
-  }
-
-  #modeTabs {
-    margin-bottom: 30px;
-  }
-
-  /* Quiz container */
-  #quiz-container {
-    background: white;
-    border-radius: 8px;
-    padding: 25px 30px;
-    box-shadow: 0 6px 15px rgb(39 174 96 / 0.2);
-  }
-
-  #timer {
-    font-size: 1.1rem;
-    color: #e74c3c;
-    text-align: right;
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-
-  progress#progressBar {
-    width: 100%;
-    height: 22px;
-    margin-bottom: 20px;
-    accent-color: #27ae60;
-    border-radius: 10px;
-  }
-
-  #question {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-
-  .options {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 15px;
-  }
-  .options li {
-    margin-bottom: 14px;
-    font-size: 1.05rem;
-  }
-  .options li input[type="radio"] {
-    margin-right: 12px;
-    transform: scale(1.2);
-    cursor: pointer;
-  }
-  .options li label {
-    cursor: pointer;
-  }
-
-  button {
-    background-color: #27ae60;
-    border: none;
-    color: white;
-    padding: 14px 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background-color 0.25s ease;
-  }
-  button:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-  }
-  button:hover:not(:disabled) {
-    background-color: #219150;
-  }
-
-  #explanation {
-    background-color: #ecf0f1;
-    padding: 15px 20px;
-    border-radius: 6px;
-    margin-top: 12px;
-    font-size: 1rem;
-    color: #34495e;
-    display: none;
-  }
-
-  #results {
-    display: none;
-    text-align: center;
-  }
-  #results h2 {
-    font-weight: 700;
-    color: #27ae60;
-  }
-  #results ul {
-    text-align: left;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0;
-    list-style: none;
-  }
-  #results ul li {
-    margin: 6px 0;
-    padding: 6px 12px;
-    border-radius: 6px;
-  }
-  #results ul li.correct {
-    background-color: #d4f5d4;
-    color: #2e7d32;
-    font-weight: 600;
-  }
-  #results ul li.incorrect {
-    background-color: #fcdada;
-    color: #c62828;
-    font-weight: 600;
-  }
-  #results button {
-    margin-top: 20px;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DNST Practice Platform</title>
+  <style>
     body {
-      padding: 15px 10px;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
     }
-    header h1 {
-      font-size: 1.7rem;
+    header {
+      background: #006400;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
     }
-    .tab {
-      padding: 8px 15px;
-      font-size: 0.9rem;
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
     }
-  }
-</style>
+    .section {
+      background: white;
+      margin-bottom: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #006400;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+    .question-box {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 6px;
+    }
+    .question-box p {
+      margin-bottom: 10px;
+    }
+    .option {
+      display: block;
+      margin: 5px 0;
+    }
+    .explanation {
+      margin-top: 10px;
+      color: #006400;
+      font-weight: bold;
+    }
+    .result {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      font-weight: 600;
+      padding: 12px 18px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: background-color 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      background-color: #1ebe5b;
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <h1>DNST Post UTME Practice & Exam</h1>
+  <h1>DNST Online Practice Platform</h1>
+  <p>Prepare Smart. Score High. Join the Winning Team.</p>
 </header>
 
-<!-- Mode selection -->
-<div id="modeTabs" class="tab-group">
-  <div class="tab active" data-mode="practice">Practice Mode</div>
-  <div class="tab" data-mode="exam">Exam Mode</div>
+<div class="container">
+
+  <div class="section">
+    <h2>1. DNST UNIBEN Post UTME Practice Questions</h2>
+    <button class="btn" onclick="startPractice('UNIBEN')">Start Practice Mode</button>
+    <button class="btn" onclick="startExam('UNIBEN')">Start Exam Mode</button>
+  </div>
+
+  <div class="section">
+    <h2>2. DNST DELSU Post UTME Practice Questions</h2>
+    <button class="btn" onclick="startPractice('DELSU')">Start Practice Mode</button>
+    <button class="btn" onclick="startExam('DELSU')">Start Exam Mode</button>
+  </div>
+
+  <div class="section">
+    <h2>3. DNST School of Nursing Post UTME Practice Questions</h2>
+    <button class="btn" onclick="startPractice('NURSING')">Start Practice Mode</button>
+    <button class="btn" onclick="startExam('NURSING')">Start Exam Mode</button>
+  </div>
+
+  <div id="quiz-section" class="section" style="display:none;">
+    <h2 id="quiz-title"></h2>
+    <div id="question-container"></div>
+    <button id="next-btn" class="btn" onclick="nextQuestion()">Next</button>
+    <div id="result" class="result"></div>
+  </div>
+
 </div>
 
-<!-- School selection -->
-<div id="schoolTabs" class="tab-group">
-  <div class="tab active" data-set="uniben">DNST UNIBEN POST UTME PRACTICE QUESTION</div>
-  <div class="tab" data-set="delsu">DNST DELSU POST UTME PRACTICE QUESTION</div>
-  <div class="tab" data-set="nursing">DNST SCHOOL OF NURSING POST UTME PRACTICE QUESTION</div>
-</div>
-
-<div id="quiz-container">
-  <div id="timer">Time Remaining: <span id="time">60</span> seconds</div>
-  <progress id="progressBar" value="0" max="100"></progress>
-
-  <div id="question">Loading question...</div>
-
-  <ul class="options" id="options"></ul>
-
-  <button id="toggleExplanationBtn" style="margin-bottom: 10px; display:none;">Show Explanation</button>
-  <div id="explanation"></div>
-
-  <button id="nextBtn" disabled>Next</button>
-</div>
-
-<div id="results">
-  <h2>Your Score: <span id="score"></span></h2>
-  <ul id="detailedResults"></ul>
-  <button id="restartBtn">Try Again</button>
-</div>
-
-<script>
-  // Questions data
-  const questionSets = {
-    uniben: [
-      {
-        question: "What is the capital of Nigeria?",
-        options: ["Lagos", "Abuja", "Kano", "Port Harcourt"],
-        answer: 1,
-        explanation: "Abuja is the capital city of Nigeria since 1991."
-      },
-      {
-        question: "Which river is the longest in Nigeria?",
-        options: ["Niger River", "Benue River", "Niger Delta", "Chad River"],
-        answer: 0,
-        explanation: "The Niger River is the longest river in Nigeria, about 4,180 km long."
-      },
-      // Add more UNIBEN questions here...
-    ],
-    delsu: [
-      {
-        question: "DNST DELSU free classes start on which date?",
-        options: ["Friday, May 30", "Monday, June 1", "Saturday, May 25", "Sunday, June 10"],
-        answer: 0,
-        explanation: "The free DNST DELSU classes start on Friday, May 30 as announced."
-      },
-      {
-        question: "What color scheme is preferred for DNST DELSU website?",
-        options: ["Green, White, Yellow", "Red, White, Blue", "Black, White, Grey", "Purple, Orange, White"],
-        answer: 0,
-        explanation: "Green, White, and Yellow are preferred colors for DNST DELSU."
-      },
-      // Add more DELSU questions here...
-    ],
-    nursing: [
-      {
-        question: "What does DNST stand for in the School of Nursing?",
-        options: ["Department of Nursing Science and Technology", "Dr Noble Science Tutorial", "Delta National Science Team", "Department of Nutrition and Science Teaching"],
-        answer: 1,
-        explanation: "DNST stands for Dr Noble Science Tutorial."
-      },
-      {
-        question: "When does the nursing post UTME practice start?",
-        options: ["June 15", "May 30", "July 1", "May 25"],
-        answer: 1,
-        explanation: "The nursing post UTME practice starts May 30 with DNST sessions."
-      },
-      // Add more Nursing questions here...
-    ]
-  };
-
-  // State variables
-  let currentSet = 'uniben'; // active school
-  let currentMode = 'practice'; // default mode
-  let currentQuestionIndex = 0;
-  let score = 0;
-  let timeLeft = 60;
-  let timerInterval;
-  let userAnswers = []; // store answers for exam mode
-
-  // Limits
-  const maxQuestions = {
-    practice: 100,
-    exam: 50
-  };
-
-  // DOM Elements
-  const timerElement = document.getElementById('time');
-  const progressBar = document.getElementById('progressBar');
-  const questionElement = document.getElementById('question');
-  const optionsElement = document.getElementById('options');
-  const nextBtn = document.getElementById('nextBtn');
-  const resultsContainer = document.getElementById('results');
-  const scoreElement = document.getElementById('score');
-  const quizContainer = document.getElementById('quiz-container');
-  const restartBtn = document.getElementById('restartBtn');
-  const toggleExplanationBtn = document.getElementById('toggleExplanationBtn');
-  const explanationDiv = document.getElementById('explanation');
-
-  // Tabs
-  const modeTabs = document.querySelectorAll('#modeTabs .tab');
-  const schoolTabs = document.querySelectorAll('#schoolTabs .tab');
-
-  // --- Event listeners for mode tabs ---
-  modeTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      if (tab.classList.contains('active')) return;
-      modeTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      currentMode = tab.dataset.mode;
-      resetQuiz();
-    });
-  });
-
-  // --- Event listeners for school tabs ---
-  schoolTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      if (tab.classList.contains('active')) return;
-      schoolTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      currentSet = tab.dataset.set;
-      resetQuiz();
-    });
-  });
-
-  // Timer functions
-  function startTimer() {
-    clearInterval(timerInterval);
-    timeLeft = 60;
-    timerElement.textContent = timeLeft;
-    timerInterval = setInterval(() => {
-      timeLeft--;
-      timerElement.textContent = timeLeft;
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        alert("Time's up! Moving to next question.");
-        handleAnswerTimeout();
-      }
-    }, 1000);
-  }
-
-  function handleAnswerTimeout() {
-    if(currentMode === 'practice'){
-      // For practice, treat as wrong answer and move on
-      nextQuestion();
-    } else {
-      // For exam, record no answer (null) and move on
-      userAnswers.push(null);
-      nextQuestion();
-    }
-  }
-
-  // Load a question
-  function loadQuestion() {
-    clearInterval(timerInterval);
-    toggleExplanationBtn.style.display = 'none';
-    explanationDiv.style.display = 'none';
-    explanationDiv.textContent = '';
-    nextBtn.disabled = true;
-
-    const questions = questionSets[currentSet];
-    const maxQ = currentMode === 'practice' ? maxQuestions.practice : maxQuestions.exam;
-    if(questions.length > maxQ){
-      questions.length = maxQ; // truncate if needed
-    }
-
-    if(currentQuestionIndex >= questions.length){
-      showResults();
-      return;
-    }
-
-    const currentQ = questions[currentQuestionIndex];
-    questionElement.textContent = `Q${currentQuestionIndex + 1}. ${currentQ.question}`;
-    optionsElement.innerHTML = '';
-
-    currentQ.options.forEach((option, index) => {
-      const li = document.createElement('li');
-      const radioInput = document.createElement('input');
-      radioInput.type = 'radio';
-      radioInput.name = 'option';
-      radioInput.id = 'option' + index;
-      radioInput.value = index;
-
-      radioInput.addEventListener('change', () => {
-        nextBtn.disabled = false;
-        if(currentMode === 'practice'){
-          // show answer & explanation immediately
-          showAnswerFeedback(index);
-        } else {
-          // just enable next button in exam mode, no feedback
-          toggleExplanationBtn.style.display = 'none';
-          explanationDiv.style.display = 'none';
-          explanationDiv.textContent = '';
-        }
-      });
-
-      const label = document.createElement('label');
-      label.htmlFor = 'option' + index;
-      label.textContent = option;
-
-      li.appendChild(radioInput);
-      li.appendChild(label);
-      optionsElement.appendChild(li);
-    });
-
-    progressBar.value = (currentQuestionIndex / questions.length) * 100;
-
-    startTimer();
-  }
-
-  // Show immediate feedback for Practice mode
-  function showAnswerFeedback(selectedIndex) {
-    const currentQ = questionSets[currentSet][currentQuestionIndex];
-
-    toggleExplanationBtn.style.display = 'inline-block';
-    explanationDiv.style.display = 'block';
-
-    if(selectedIndex === currentQ.answer){
-      explanationDiv.style.backgroundColor = '#d4f5d4'; // green background
-      explanationDiv.style.color = '#2e7d32';
-      explanationDiv.textContent = `Correct! ✅ ${currentQ.explanation || ''}`;
-    } else {
-      explanationDiv.style
-      <!-- WhatsApp Floating Button -->
+<!-- WhatsApp Floating Button -->
 <a href="https://wa.me/2349156478004?text=Hello%20DNST%2C%20I'm%20interested%20in%20joining%20your%20paid%20class." 
    class="whatsapp-float" 
    target="_blank" 
@@ -433,24 +134,122 @@
   💬 Chat with us on WhatsApp
 </a>
 
-<style>
-  .whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    font-weight: 600;
-    padding: 12px 18px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 999;
-    transition: background-color 0.3s ease;
+<script>
+  const questions = {
+    UNIBEN: [
+      {
+        question: "What is the boiling point of water at sea level?",
+        options: ["90°C", "100°C", "110°C", "80°C"],
+        answer: 1,
+        explanation: "Water boils at 100°C at sea level due to atmospheric pressure."
+      },
+      {
+        question: "Which organ is responsible for filtering blood?",
+        options: ["Heart", "Kidney", "Lungs", "Liver"],
+        answer: 1,
+        explanation: "The kidney filters waste from the blood."
+      }
+    ],
+    DELSU: [
+      {
+        question: "The chemical symbol for Sodium is?",
+        options: ["Na", "S", "N", "So"],
+        answer: 0,
+        explanation: "Sodium is represented as Na from its Latin name Natrium."
+      }
+    ],
+    NURSING: [
+      {
+        question: "What is the normal human body temperature?",
+        options: ["37°C", "36°C", "35°C", "38°C"],
+        answer: 0,
+        explanation: "The average human body temperature is 37°C."
+      }
+    ]
+  };
+
+  let currentMode = "";
+  let currentSchool = "";
+  let currentQuestion = 0;
+  let score = 0;
+
+  function startPractice(school) {
+    currentMode = "practice";
+    startQuiz(school);
   }
 
-  .whatsapp-float:hover {
-    background-color: #1ebe5b;
+  function startExam(school) {
+    currentMode = "exam";
+    startQuiz(school);
   }
-</style>
+
+  function startQuiz(school) {
+    currentSchool = school;
+    currentQuestion = 0;
+    score = 0;
+    document.getElementById("quiz-section").style.display = "block";
+    document.getElementById("quiz-title").textContent = ${school} - ${currentMode.toUpperCase()} MODE;
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const q = questions[currentSchool][currentQuestion];
+    const container = document.getElementById("question-container");
+    container.innerHTML = `
+      <div class="question-box">
+        <p><strong>Q${currentQuestion + 1}:</strong> ${q.question}</p>
+        ${q.options.map((opt, i) =>
+          `<label class="option">
+            <input type="radio" name="option" value="${i}"> ${opt}
+          </label>`).join("")}
+        <div class="explanation" id="explanation"></div>
+      </div>
+    `;
+    document.getElementById("result").innerHTML = "";
+  }
+
+  function nextQuestion() {
+    const q = questions[currentSchool][currentQuestion];
+    const selected = document.querySelector('input[name="option"]:checked');
+    if (!selected) {
+      alert("Please select an option.");
+      return;
+    }
+    const selectedIndex = parseInt(selected.value);
+    if (currentMode === "practice") {
+      const explanation = document.getElementById("explanation");
+      if (selectedIndex === q.answer) {
+        explanation.innerHTML = "✅ Correct!<br>" + q.explanation;
+      } else {
+        explanation.innerHTML = "❌ Wrong. Correct answer: " + q.options[q.answer] + "<br>" + q.explanation;
+      }
+      return; // wait for user to click next again
+    }
+
+    if (currentMode === "exam") {
+      if (selectedIndex === q.answer) score++;
+    }
+
+    currentQuestion++;
+    if (currentQuestion < questions[currentSchool].length && 
+        (currentMode === "practice" || currentQuestion < 50)) {
+      showQuestion();
+    } else {
+      finishQuiz();
+    }
+  }
+
+  function finishQuiz() {
+    const container = document.getElementById("question-container");
+    const total = currentMode === "exam" ? 50 : questions[currentSchool].length;
+    let resultHTML = <p>You answered ${score} out of ${total} correctly.</p>;
+    if (currentMode === "exam") {
+      resultHTML += <p><strong>Final Score:</strong> ${score * 2}%</p>;
+    }
+    container.innerHTML = "";
+    document.getElementById("result").innerHTML = resultHTML;
+  }
+</script>
+
+</body>
+</html>
