@@ -2,13 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DELSU Practice Mode - DNST</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNST DELSU POST UTME PRACTICE</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: green;
+    }
+    .mode-buttons {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .practice { background-color: green; color: white; }
+    .exam { background-color: orange; color: white; }
+    #quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>DELSU POST UTME PRACTICE MODE</h1>
+  <h1>DNST DELSU POST UTME PRACTICE</h1>
+  <div class="mode-buttons">
+    <button class="practice" onclick="startPracticeMode()">Practice Mode</button>
+    <button class="exam" onclick="startExamMode()">Exam Focus Mode</button>
+  </div>
+
   <div id="quiz-container"></div>
-  <script src="delsu-quiz.js"></script>
+
+  <script src="delsu.js"></script>
 </body>
 </html>
