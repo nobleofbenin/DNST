@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DNST Exam Prep</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #2d572c; /* dark green */
+      margin: 0;
+      padding: 0 1rem 3rem 1rem;
+      min-height: 100vh;
+    }
+    header {
+      background: #4caf50; /* green */
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      margin-bottom: 1rem;
+    }
+    section {
+      border: 2px solid #4caf50;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(76,175,80,0.15);
+    }
+    section h2 {
+      color: #4caf50;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 1.6rem;
+      letter-spacing: 0.03em;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    button {
+      background-color: #ffeb3b; /* yellow */
+      color: #2d572c;
+      border: none;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      min-width: 140px;
+    }
+    button:hover {
+      background-color: #fdd835;
+    }
+    footer {
+      background: #4caf50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    /* WhatsApp floating button */
+    #whatsapp-btn {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background-color: #25d366;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    #whatsapp-btn:hover {
+      background-color: #1ebe57;
+    }
+    #whatsapp-btn img {
+      width: 35px;
+      height: 35px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>DNST Exam Prep</header>
+
+  <main>
+
+    <section id="delsu">
+      <h2>DELSU</h2>
+      <div class="btn-group">
+        <button onclick="startPractice('delsu')">Practice Mode</button>
+        <button onclick="startExam('delsu')">Exam Mode</button>
+      </div>
+    </section>
+
+    <section id="uniben">
+      <h2>UNIBEN</h2>
+      <div class="btn-group">
+        <button onclick="startPractice('uniben')">Practice Mode</button>
+        <button onclick="startExam('uniben')">Exam Mode</button>
+      </div>
+    </section>
+
+    <section id="son">
+      <h2>School of Nursing</h2>
+      <div class="btn-group">
+        <button onclick="startPractice('son')">Practice Mode</button>
+        <button onclick="startExam('son')">Exam Mode</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>© 2025 DNST Exam Prep. All rights reserved.</footer>
+
+  <a
+    href="https://wa.me/yourwhatsappnumber"
+    target="_blank"
+    rel="noopener"
+    id="whatsapp-btn"
+    aria-label="Chat on WhatsApp"
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+      alt="WhatsApp"
+    />
+  </a>
+
+  <script>
+    function startPractice(school) {
+      alert(`Starting Practice Mode for ${school.toUpperCase()}`);
+      // TODO: Replace alert with actual navigation or loading practice quiz logic
+    }
+
+    function startExam(school) {
+      alert(`Starting Exam Mode for ${school.toUpperCase()}`);
+      // TODO: Replace alert with actual navigation or loading exam quiz logic
+    }
+  </script>
+
+</body>
+</html>
