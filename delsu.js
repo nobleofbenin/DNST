@@ -1,3 +1,4 @@
+alert("delsu.js is connected!");
 <!DOCTYPE html>
 <html lang="en">
 <head>
