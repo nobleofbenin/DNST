@@ -1,88 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DELSU Post-UTME Practice</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #e8ffe8;
-      color: #003300;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #006600;
-    }
-    #modeSelect {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .question-box {
-      background-color: #ffffff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 700px;
-      margin: 0 auto 20px;
-    }
-    .options button {
-      display: block;
-      width: 100%;
-      margin: 5px 0;
-      padding: 10px;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .navigation-buttons {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .navigation-buttons button {
-      margin: 0 10px;
-      padding: 10px 20px;
-      background-color: #006600;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    #feedback {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    #timer, #scoreContainer {
-      text-align: center;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-  </style>
+  <title>DELSU Practice Mode</title>
 </head>
 <body>
-  <h1>DNST DELSU POST UTME PRACTICE QUESTION</h1>
-  <div id="modeSelect">
-    <button onclick="startPracticeMode()">Practice Mode</button>
-    <button onclick="startExamMode()">Exam Mode</button>
-  </div>
-  <div id="quizContainer" style="display:none">
-    <div id="timer"></div>
-    <div class="question-box">
-      <div id="question"></div>
-      <div class="options" id="options"></div>
-      <div id="feedback"></div>
-    </div>
-    <div class="navigation-buttons">
-      <button onclick="prevQuestion()">Previous</button>
-      <button onclick="nextQuestion()">Next</button>
-    </div> <script src="delsu.js"></script>
+  <h1>Practice Mode</h1>
+  <div id="questionBox" style="font-size: 18px; margin-top: 20px;"></div>
 
-    <div id="scoreContainer"></div>
-  </div>
+  <!-- JavaScript file -->
   <script src="delsu.js"></script>
 </body>
 </html>
