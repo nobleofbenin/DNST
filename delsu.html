@@ -1,14 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>DELSU Practice Mode</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNST DELSU Practice Mode</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e8f5e9;
+      padding: 20px;
+      color: #2e7d32;
+    }
+    .question-box {
+      background: #fff;
+      border: 2px solid #a5d6a7;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    .options button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #c8e6c9;
+      cursor: pointer;
+    }
+    .options button:hover {
+      background-color: #a5d6a7;
+    }
+    .feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .navigation {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 <body>
-  <h1>Practice Mode</h1>
-  <div id="questionBox" style="font-size: 18px; margin-top: 20px;"></div>
+  <div class="question-box">
+    <h1>Practice Mode - DNST DELSU</h1>
+    <div id="questionContainer"></div>
+    <div class="navigation">
+      <button onclick="prevQuestion()">Previous</button>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
 
-  <!-- JavaScript file -->
-  <script src="delsu.js"></script>
+  <script>
+    const questions = [
+      {
+        question: "What is the capital of Nigeria?",
+        options: ["Lagos", "Abuja", "Kano", "Benin"],
+        answer: 1,
+        explanation: "Abuja became the capital of Nigeria in 1991, replacing Lagos."
+      },
+      {
+        question: "Which organ pumps blood throughout the human body?",
+        options: ["Liver", "Brain", "Heart", "Kidney"],
+        answer: 2,
+        explanation: "The heart pumps blood throughout the body via the circulatory system."
+      },
+      // Add more questions here (total at least 25)
+    ];
+
+    let shuffled = [...questions].sort(() => 0.5 - Math.random()).slice(0, 25);
+    let current = 0;
+
+    function renderQuestion() {
+      const q = shuffled[current];
+      const container = document.getElementById('questionContainer');
+      container.innerHTML = `
+        <h2>Question ${current + 1} of ${shuffled.length}</h2>
+        <p>${q.question}</p>
+        <div class="options">
+          ${q.options.map((opt, idx) => `<button onclick="selectOption(${idx})">${opt}</button>`).join('')}
+        </div>
+        <div id="feedback" class="feedback"></div>
+      `;
+    }
+
+    function selectOption(index) {
+      const q = shuffled[current];
+      const feedback = document.getElementById('feedback');
+      if (index === q.answer) {
+        feedback.innerHTML = `<span style='color: green;'>Correct!</span><br>${q.explanation}`;
+      } else {
+        feedback.innerHTML = `<span style='color: red;'>Wrong!</span> The correct answer is <strong>${q.options[q.answer]}</strong>.<br>${q.explanation}`;
+      }
+    }
+
+    function nextQuestion() {
+      if (current < shuffled.length - 1) {
+        current++;
+        renderQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (current > 0) {
+        current--;
+        renderQuestion();
+      }
+    }
+
+    renderQuestion();
+  </script>
 </body>
 </html>
+ 
