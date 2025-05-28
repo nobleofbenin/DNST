@@ -28,18 +28,91 @@
       border-radius: 10px;
       text-decoration: none;
       display: inline-block;
+      cursor: pointer;
     }
     .button:hover {
       background-color: green;
     }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 30px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+    .close {
+      color: red;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .mode-button {
+      margin-top: 20px;
+      display: block;
+      padding: 12px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
+
   <h1>DNST POST UTME PRACTICE</h1>
   <p>Welcome! Choose your school below to begin your Post UTME preparation.</p>
 
-  <a href="uniben.html" class="button">UNIBEN Questions</a>
-  <a href="delsu.html" class="button">DELSU Questions</a>
-  <a href="nursing.html" class="button">School of Nursing Questions</a>
+  <button class="button" onclick="openModal('uniben')">UNIBEN Questions</button>
+  <button class="button" onclick="openModal('delsu')">DELSU Questions</button>
+  <button class="button" onclick="openModal('nursing')">School of Nursing Questions</button>
+
+  <!-- Modal -->
+  <div id="popupModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle">Choose a mode</h2>
+      <a id="practiceLink" class="mode-button">Practice Mode</a>
+      <a id="examLink" class="mode-button">Exam Focus Mode</a>
+    </div>
+  </div>
+
+  <script>
+    function openModal(type) {
+      document.getElementById("popupModal").style.display = "block";
+      let base = type + ".html";
+      document.getElementById("modalTitle").textContent = "Choose a mode for " + type.toUpperCase();
+      document.getElementById("practiceLink").href = base + "?mode=practice";
+      document.getElementById("examLink").href = base + "?mode=exam";
+    }
+
+    function closeModal() {
+      document.getElementById("popupModal").style.display = "none";
+    }
+
+    // Close modal if user clicks outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById("popupModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
 </body>
 </html>
