@@ -1,80 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DNST 2025 DELSU POST UTME ONLINE CLASS - Quiz</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DNST Post UTME Practice Questions</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7f9fc;
+    color: #2c3e50;
+    margin: 0; padding: 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  header h1 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: #27ae60;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #27ae60;
+  }
+  .tab {
+    padding: 12px 25px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555;
+    border-bottom: 4px solid transparent;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+  .tab.active {
+    color: #27ae60;
+    border-color: #27ae60;
+  }
+
+  /* Quiz container */
+  #quiz-container {
+    background: white;
+    border-radius: 8px;
+    padding: 25px 30px;
+    box-shadow: 0 6px 15px rgb(39 174 96 / 0.2);
+  }
+
+  #timer {
+    font-size: 1.1rem;
+    color: #e74c3c;
+    text-align: right;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  progress#progressBar {
+    width: 100%;
+    height: 22px;
+    margin-bottom: 20px;
+    accent-color: #27ae60;
+    border-radius: 10px;
+  }
+
+  #question {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .options {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+  }
+  .options li {
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+  }
+  .options li input[type="radio"] {
+    margin-right: 12px;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+  .options li label {
+    cursor: pointer;
+  }
+
+  button {
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    padding: 14px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.25s ease;
+  }
+  button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+  }
+  button:hover:not(:disabled) {
+    background-color: #219150;
+  }
+
+  #explanation {
+    background-color: #ecf0f1;
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #34495e;
+    display: none;
+  }
+
+  #results {
+    display: none;
+    text-align: center;
+  }
+  #results h2 {
+    font-weight: 700;
+    color: #27ae60;
+  }
+  #results button {
+    margin-top: 15px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 15px 10px;
     }
-    header {
-      text-align: center;
-      margin-bottom: 30px;
+    header h1 {
+      font-size: 1.7rem;
     }
-    h1 {
-      color: #4CAF50;
+    .tab {
+      padding: 10px 15px;
+      font-size: 0.9rem;
     }
-    #timer {
-      font-size: 1.2em;
-      color: #e74c3c;
-      text-align: right;
-      margin-bottom: 10px;
-    }
-    #progressBar {
-      width: 100%;
-      height: 20px;
-      margin-bottom: 20px;
-    }
-    #question {
-      font-size: 1.3em;
-      margin-bottom: 15px;
-    }
-    .options {
-      list-style: none;
-      padding: 0;
-    }
-    .options li {
-      margin-bottom: 10px;
-    }
-    button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      font-size: 1em;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    button:disabled {
-      background-color: #999;
-      cursor: not-allowed;
-    }
-    #results {
-      display: none;
-      text-align: center;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
 <header>
-  <h1>DNST 2025 DELSU POST UTME ONLINE CLASS - Quiz</h1>
+  <h1>DNST Post UTME Practice Questions</h1>
 </header>
 
-<div id="timer">Time Remaining: <span id="time">60</span> seconds</div>
-<progress id="progressBar" value="0" max="100"></progress>
+<div class="tabs">
+  <div class="tab active" data-set="uniben">DNST UNIBEN POST UTME PRACTICE QUESTION</div>
+  <div class="tab" data-set="delsu">DNST DELSU POST UTME PRACTICE QUESTION</div>
+  <div class="tab" data-set="nursing">DNST SCHOOL OF NURSING POST UTME PRACTICE QUESTION</div>
+</div>
 
 <div id="quiz-container">
+  <div id="timer">Time Remaining: <span id="time">60</span> seconds</div>
+  <progress id="progressBar" value="0" max="100"></progress>
+
   <div id="question">Loading question...</div>
+
   <ul class="options" id="options"></ul>
+
+  <button id="toggleExplanationBtn" style="margin-bottom: 10px; display:none;">Show Explanation</button>
+  <div id="explanation"></div>
+
   <button id="nextBtn" disabled>Next</button>
 </div>
 
@@ -84,25 +186,56 @@
 </div>
 
 <script>
-  const questions = [
-    {
-      question: "What does DNST stand for?",
-      options: ["Department of Natural Sciences and Technology", "Dr Noble Science Tutorial", "Delta National Science Team", "Department of Nutrition and Science Teaching"],
-      answer: 1
-    },
-    {
-      question: "What color scheme is preferred for the DNST website?",
-      options: ["Red, White, Blue", "Green, White, Yellow", "Black, White, Grey", "Purple, Orange, White"],
-      answer: 1
-    },
-    {
-      question: "When do the free DNST classes start?",
-      options: ["Friday, May 30", "Monday, June 1", "Saturday, May 25", "Sunday, June 10"],
-      answer: 0
-    },
-    // Add more questions here
-  ];
+  // Question sets for each section
+  const questionSets = {
+    uniben: [
+      {
+        question: "What is the capital of Nigeria?",
+        options: ["Lagos", "Abuja", "Kano", "Port Harcourt"],
+        answer: 1,
+        explanation: "Abuja is the capital city of Nigeria since 1991."
+      },
+      {
+        question: "Which river is the longest in Nigeria?",
+        options: ["Niger River", "Benue River", "Niger Delta", "Chad River"],
+        answer: 0,
+        explanation: "The Niger River is the longest river in Nigeria, about 4,180 km long."
+      }
+      // Add more UNIBEN questions here...
+    ],
+    delsu: [
+      {
+        question: "DNST DELSU free classes start on which date?",
+        options: ["Friday, May 30", "Monday, June 1", "Saturday, May 25", "Sunday, June 10"],
+        answer: 0,
+        explanation: "The free DNST DELSU classes start on Friday, May 30 as announced."
+      },
+      {
+        question: "What color scheme is preferred for DNST DELSU website?",
+        options: ["Green, White, Yellow", "Red, White, Blue", "Black, White, Grey", "Purple, Orange, White"],
+        answer: 0,
+        explanation: "Green, White, and Yellow are preferred colors for DNST DELSU."
+      }
+      // Add more DELSU questions here...
+    ],
+    nursing: [
+      {
+        question: "What does DNST stand for in the School of Nursing?",
+        options: ["Department of Nursing Science and Technology", "Dr Noble Science Tutorial", "Delta National Science Team", "Department of Nutrition and Science Teaching"],
+        answer: 1,
+        explanation: "DNST stands for Dr Noble Science Tutorial."
+      },
+      {
+        question: "When does the nursing post UTME practice start?",
+        options: ["June 15", "May 30", "July 1", "May 25"],
+        answer: 1,
+        explanation: "The nursing post UTME practice starts May 30 with DNST sessions."
+      }
+      // Add more Nursing questions here...
+    ]
+  };
 
+  let currentSet = 'uniben'; // default active tab
   let currentQuestionIndex = 0;
   let score = 0;
   let timeLeft = 60;
@@ -117,8 +250,23 @@
   const scoreElement = document.getElementById('score');
   const quizContainer = document.getElementById('quiz-container');
   const restartBtn = document.getElementById('restartBtn');
+  const toggleExplanationBtn = document.getElementById('toggleExplanationBtn');
+  const explanationDiv = document.getElementById('explanation');
+
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (tab.classList.contains('active')) return;
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentSet = tab.dataset.set;
+      resetQuiz();
+    });
+  });
 
   function startTimer() {
+    clearInterval(timerInterval);
     timeLeft = 60;
     timerElement.textContent = timeLeft;
     timerInterval = setInterval(() => {
@@ -133,10 +281,13 @@
   }
 
   function loadQuestion() {
-    startTimer();
+    clearInterval(timerInterval);
+    toggleExplanationBtn.style.display = 'none';
+    explanationDiv.style.display = 'none';
+    explanationDiv.textContent = '';
     nextBtn.disabled = true;
 
-    const currentQ = questions[currentQuestionIndex];
+    const currentQ = questionSets[currentSet][currentQuestionIndex];
     questionElement.textContent = currentQ.question;
     optionsElement.innerHTML = '';
 
@@ -150,6 +301,7 @@
 
       radioInput.addEventListener('change', () => {
         nextBtn.disabled = false;
+        toggleExplanationBtn.style.display = 'inline-block';
       });
 
       const label = document.createElement('label');
@@ -161,21 +313,23 @@
       optionsElement.appendChild(li);
     });
 
-    progressBar.value = (currentQuestionIndex / questions.length) * 100;
+    progressBar.value = (currentQuestionIndex / questionSets[currentSet].length) * 100;
+
+    startTimer();
   }
 
   function nextQuestion() {
     clearInterval(timerInterval);
+
     const selectedOption = document.querySelector('input[name="option"]:checked');
     if (selectedOption) {
-      if (parseInt(selectedOption.value) === questions[currentQuestionIndex].answer) {
+      if (parseInt(selectedOption.value) === questionSets[currentSet][currentQuestionIndex].answer) {
         score++;
       }
     }
-
     currentQuestionIndex++;
 
-    if (currentQuestionIndex < questions.length) {
+    if (currentQuestionIndex < questionSets[currentSet].length) {
       loadQuestion();
     } else {
       showResults();
@@ -185,21 +339,35 @@
   function showResults() {
     quizContainer.style.display = 'none';
     resultsContainer.style.display = 'block';
-    scoreElement.textContent = `${score} / ${questions.length}`;
+    scoreElement.textContent = `${score} / ${questionSets[currentSet].length}`;
     progressBar.value = 100;
   }
 
-  nextBtn.addEventListener('click', nextQuestion);
-  restartBtn.addEventListener('click', () => {
+  function resetQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     quizContainer.style.display = 'block';
     resultsContainer.style.display = 'none';
     progressBar.value = 0;
     loadQuestion();
+  }
+
+  toggleExplanationBtn.addEventListener('click', () => {
+    if (explanationDiv.style.display === 'block') {
+      explanationDiv.style.display = 'none';
+      toggleExplanationBtn.textContent = "Show Explanation";
+    } else {
+      explanationDiv.style.display = 'block';
+      const explanationText = questionSets[currentSet][currentQuestionIndex].explanation || "No explanation available.";
+      explanationDiv.textContent = explanationText;
+      toggleExplanationBtn.textContent = "Hide Explanation";
+    }
   });
 
-  // Load first question on page load
+  nextBtn.addEventListener('click', nextQuestion);
+  restartBtn.addEventListener('click', resetQuiz);
+
+  // Initial load
   loadQuestion();
 </script>
 
