@@ -11,3 +11,14 @@ const questions = [
   },
   // Add more questions here in the same format
 ];
+Sure! Here's a single biology multiple-choice question:
+
+**Question:**
+Which organelle is known as the "powerhouse of the cell"?
+
+A. Nucleus
+B. Ribosome
+C. Mitochondrion
+D. Endoplasmic reticulum
+
+**Answer:** C. Mitochondrion
