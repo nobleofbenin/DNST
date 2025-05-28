@@ -1,135 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MCQ Practice</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
+<!-- Timer Display -->
+<div id="timer">Time Remaining: <span id="time">60</span> seconds</div>
+
+<script>
+  let timeLeft = 60;
+  const timerElement = document.getElementById('time');
+  
+  const timer = setInterval(() => {
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      alert("Time's up!");
+      // Optionally, submit the quiz or move to the next question
+    } else {
+      timeLeft--;
+      timerElement.textContent = timeLeft;
     }
-
-    .container {
-      max-width: 600px;
-      width: 100%;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 30px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    #question-text {
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    #options button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      background-color: #eee;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    #options button:hover:not(:disabled) {
-      background-color: #d0e6ff;
-    }
-
-    #options button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-
-    #result {
-      font-size: 18px;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    #explanation {
-      font-style: italic;
-      margin-top: 10px;
-      color: #666;
-    }
-
-    button#next-btn {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      margin-top: 20px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    button#next-btn:hover {
-      background-color: #0056b3;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>MCQ Practice</h1>
-    <p id="question-text"></p>
-    <div id="options"></div>
-    <p id="result"></p>
-    <p id="explanation"></p>
-    <button id="next-btn" onclick="loadQuestion()">Next Question</button>
-  </div>
-
-  <script src="questions.js"></script>
-  <script>
-    let answered = false;
-    let currentQuestion = null;
-
-    function loadQuestion() {
-      answered = false;
-      const randomIndex = Math.floor(Math.random() * questions.length);
-      currentQuestion = questions[randomIndex];
-
-      document.getElementById("question-text").textContent = currentQuestion.question;
-      const optionsDiv = document.getElementById("options");
-      optionsDiv.innerHTML = "";
-      document.getElementById("result").textContent = "";
-      document.getElementById("explanation").textContent = "";
-
-      currentQuestion.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.onclick = () => handleAnswer(option, btn);
-        optionsDiv.appendChild(btn);
-      });
-    }
-
-    function handleAnswer(selectedOption, button) {
-      if (answered) return;
-      answered = true;
-
-      const buttons = document.querySelectorAll("#options button");
-      buttons.forEach(btn => btn.disabled = true);
-
-      const isCorrect = selectedOption === currentQuestion.correctAnswer;
-      document.getElementById("result").textContent = isCorrect ? "✅ Correct!" : "❌ Wrong!";
-      document.getElementById("explanation").textContent = "Explanation: " + currentQuestion.explanation;
-    }
-
-    window.onload = loadQuestion;
-  </script>
-</body>
-</html>
+  }, 1000);
+</script>
