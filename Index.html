@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DNST POST UTME 2025 - Practice & Exam Mode</title>
+<style>
+  :root {
+    --primary-green: #34C759;
+    --secondary-yellow: #F7DC6F;
+    --background-white: #FFFFFF;
+    --text-dark: #222;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-white);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(90deg, var(--primary-green), var(--secondary-yellow));
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  }
+  header h1 {
+    margin: 0 0 8px 0;
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+  header p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  main {
+    flex-grow: 1;
+    padding: 30px 20px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .welcome-message {
+    font-size: 1.25rem;
+    margin-bottom: 35px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .mode-selection {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  .mode-card {
+    flex: 1 1 300px;
+    border: 3px solid var(--primary-green);
+    border-radius: 12px;
+    padding: 25px 20px;
+    background: #f9fff9;
+    box-shadow: 0 4px 15px rgba(52, 199, 89, 0.2);
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .mode-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 8px 25px rgba(52, 199, 89, 0.35);
+  }
+  .mode-card h2 {
+    color: var(--primary-green);
+    font-size: 1.6rem;
+    margin-top: 0;
+  }
+  .mode-card p {
+    font-size: 1rem;
+    margin: 15px 0 0 0;
+    font-weight: 500;
+  }
+
+  /* Question area */
+  #question-area {
+    text-align: left;
+    margin-top: 30px;
+  }
+  #question-area h2 {
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  #question-text {
+    font-size: 1.25rem;
+    margin: 15px 0 20px 0;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  button.option-btn {
+    padding: 12px 18px;
+    font-size: 1.1rem;
+    background: white;
+    border: 2.5px solid var(--primary-green);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: left;
+  }
+  button.option-btn:hover {
+    background-color: var(--primary-green);
+    color: white;
+  }
+  button.option-btn.correct {
+    background-color: #4caf50;
+    border-color: #4caf50;
+    color: white;
+    cursor: default;
+  }
+  button.option-btn.incorrect {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+    cursor: default;
+  }
+  #explanation {
+    margin-top: 20px;
+    font-style: italic;
+    background: var(--secondary-yellow);
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #333;
+  }
+  #result-area {
+    text-align: center;
+    margin-top: 40px;
+  }
+  #result-area h2 {
+    font-size: 2rem;
+    color: var(--primary-green);
+  }
+  #result-area p {
+    font-size: 1.25rem;
+    margin: 15px 0 30px 0;
+  }
+  #result-area button {
+    background-color: var(--primary-green);
+    border: none;
+    padding: 14px 32px;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  #result-area button:hover {
+    background-color: #2c9a46;
+  }
+
+  /* WhatsApp Float Button */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--primary-green);
+    color: white;
+    font-weight: 700;
+    padding: 15px 20px;
+    border-radius: 50px;
+    box-shadow: 0 6px 15px rgba(52,199,89,0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .whatsapp-float:hover {
+    background-color: #2c9a46;
+  }
+  .whatsapp-icon {
+    font-size: 1.6rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>DNST POST UTME 2025</h1>
+  <p>Prepare smart, practice smarter with DNST Premium Class!</p>
+</header>
+
+<main>
+  <div class="welcome-message">
+    Get ready to ace your Post UTME with DNST Premium Class! 🎉👍<br />
+    Practice with confidence and precision. Our platform is designed to help you prepare for the best. Let's get started! 💪
+  </div>
+
+  <section class="mode-selection">
+    <div class="mode-card" id="practice-mode">
+      <h2>Practice Mode</h2>
+      <p>Practice makes perfect! 🎯 Get 25 random questions with instant feedback and explanations.</p>
+    </div>
+    <div class="mode-card" id="exam-mode">
+      <h2>Exam Mode</h2>
+      <p>Time to put your skills to the test! ⏰ Get 30 random questions under 45 minutes and see your results at the end.</p>
+    </div>
+  </section>
+
+  <section id="question-area" style="display:none;">
+    <h2 id="question-number"></h2>
+    <div id="question-text"></div>
+    <div class="options" id="options-container"></div>
+    <div id="explanation" style="display:none;"></div>
+  </section>
+
+  <section id="result-area" style="display:none;">
+    <h2>Test Completed</h2>
+    <p id="score-text"></p>
+    <div id="review-container" style="text-align:left; max-height: 400px; overflow-y: auto; margin-top: 20px;"></div>
+    <button id="restart-btn">Back to Home</button>
+  </section>
+</main>
+
+<a
+  href="https://wa.me/2349156478004"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="whatsapp-float"
+  title="Join DNST Premium Class on WhatsApp"
+>
+  <span class="whatsapp-icon">📱</span> Join DNST Premium Class! Click here to get started on WhatsApp
+</a>
+
+<script>
+  // Sample Questions Array
+  // You can expand or replace this list with your full question bank
+  const allQuestions = [
+    {
+      question: "What is the capital of Nigeria?",
+      options: ["Lagos", "Abuja", "Kano", "Port Harcourt"],
+      answer: "Abuja",
+      explanation: "Abuja became the capital of Nigeria in 1991, replacing Lagos."
+    },
+    {
+      question: "Which organ pumps blood throughout the body?",
+      options: ["Liver", "Heart", "Brain", "Lung"],
+      answer: "Heart",
+      explanation: "The heart pumps blood throughout the body via the circulatory system."
+    },
+    {
+      question: "What is the chemical symbol for water?",
+      options: ["CO2", "H2O", "NaCl", "O2"],
+      answer: "H2O",
+      explanation: "H2O represents water, composed of two hydrogen atoms and one oxygen atom."
+    },
+    {
+      question: "Who wrote the novel 'Things Fall Apart'?",
+      options: ["Chinua Achebe", "Wole Soyinka", "Ngugi wa Thiong'o", "Chimamanda Ngozi Adichie"],
+      answer: "Chinua Achebe",
+      explanation: "'Things Fall Apart' was written by Chinua Achebe, a renowned Nigerian author."
+    },
+    {
+      question: "What gas do plants absorb from the atmosphere?",
+      options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+      answer: "Carbon dioxide",
+      explanation: "Plants absorb carbon dioxide during photosynthesis to produce oxygen."
+    },
+    // Add more questions here...
+  ];
+
+  // DOM Elements
+  const main = document.querySelector('main');
+  const practiceBtn = document.getElementById('practice-mode');
+  const examBtn = document.getElementById('exam-mode');
+  const questionArea = document.getElementById('question-area');
+  const questionNumber = document.getElementById('question-number');
+  const questionText = document.getElementById('question-text');
+  const optionsContainer = document.getElementById('options-container');
+  const explanationBox = document.getElementById('explanation');
+  const resultArea = document.getElementById('result-area');
+  const scoreText = document.getElementById('score-text');
+  const reviewContainer = document.getElementById('review-container');
+  const restartBtn = document.getElementById('restart-btn');
+
+  // State Variables
+  let mode = null; // 'practice' or 'exam'
+  let questions = [];
+  let currentIndex = 0;
+  let score = 0;
+  let selectedAnswers = [];
+  let examTimer = null;
+
+  // Event Listeners
+  practiceBtn.addEventListener('click', () => startTest('practice'));
+  examBtn.addEventListener('click', () => startTest('exam'));
+  restartBtn.addEventListener('click', resetApp);
+
+  // Start Test Function
+  function startTest(selectedMode) {
+    mode = selectedMode;
+    currentIndex = 0;
+    score = 0;
+    selectedAnswers = [];
+    resultArea.style.display = 'none';
+    questionArea.style.display = 'block';
+    explanationBox.style.display = 'none';
+
+    if (mode === 'practice') {
+      questions = shuffle(allQuestions).slice(0, 25);
+    } else {
+      questions = shuffle(allQuestions).slice(0, 30);
+      startExamTimer(45 * 60); // 45 minutes in seconds
+    }
+    showQuestion();
+  }
+
+  // Show Question Function
+  function showQuestion() {
+    const q = questions[currentIndex];
+    questionNumber.textContent = `Question ${currentIndex + 1} of ${questions.length}`;
+    questionText.textContent = q.question;
+    explanationBox.style.display = 'none';
+    optionsContainer.innerHTML = '';
+
+    q.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      btn.disabled = false;
+      btn.onclick = () => handleAnswer(opt, btn);
+      optionsContainer.appendChild(btn);
+    });
+  }
+
+  // Handle Answer Selection
+  function handleAnswer(selectedOption, btn) {
+    const currentQuestion = questions[currentIndex];
+    if (mode === 'practice') {
+      // Disable all options
+      Array.from(optionsContainer.children).forEach(button => button.disabled = true);
+
+      if (selectedOption === currentQuestion.answer) {
+        btn.classList.add('correct');
+        score++;
+        explanationBox.textContent = "✅ Correct! " + currentQuestion.explanation;
+      } else {
+        btn.classList.add('incorrect');
+        // Highlight correct answer
+        Array.from(optionsContainer.children).forEach(button => {
+          if (button.textContent === currentQuestion.answer) {
+            button.classList.add('correct');
+          }
+        });
+        explanationBox.textContent = `❌ Wrong. Correct answer: ${currentQuestion.answer}. ${currentQuestion.explanation}`;
+      }
+      explanationBox.style.display = 'block';
+
+      setTimeout(() => {
+        currentIndex++;
+        if (currentIndex < questions.length) {
+          showQuestion();
+        } else {
+          showResults();
+        }
+      }, 2500);
+
+    } else {
+      // Exam mode - no immediate feedback
+      selectedAnswers.push({ question: currentQuestion, selected: selectedOption });
+      currentIndex++;
+      if (current
