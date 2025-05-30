@@ -197,4 +197,145 @@
 
   <a href="https://wa.me/2349156478004" class="whatsapp-float" target="_blank">
     📱 <span>Join DNST Premium Class! Click here</span>
-  </a>
+  </a>   <script>
+    const questions = [
+      {
+        question: "What is the powerhouse of the cell?",
+        options: ["Nucleus", "Mitochondria", "Ribosome", "Chloroplast"],
+        answer: 1,
+        explanation: "Mitochondria produce the energy currency (ATP) of the cell."
+      },
+      {
+        question: "Which gas is needed for photosynthesis?",
+        options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+        answer: 1,
+        explanation: "Carbon dioxide is used in the process of photosynthesis to make glucose."
+      },
+      {
+        question: "What is H₂O commonly known as?",
+        options: ["Salt", "Water", "Acid", "Base"],
+        answer: 1,
+        explanation: "H₂O is the chemical formula for water."
+      },
+      {
+        question: "Which organ pumps blood in the human body?",
+        options: ["Liver", "Brain", "Heart", "Lungs"],
+        answer: 2,
+        explanation: "The heart pumps blood throughout the body."
+      },
+      {
+        question: "How many continents are there?",
+        options: ["5", "6", "7", "8"],
+        answer: 2,
+        explanation: "There are 7 continents in the world."
+      }
+    ];
+
+    let currentMode = null;
+    let currentQuestion = 0;
+    let score = 0;
+    let timer;
+    let selectedQuestions = [];
+
+    function startMode(mode) {
+      currentMode = mode;
+      document.querySelector(".mode-buttons").style.display = "none";
+      document.querySelector("#app").style.display = "block";
+
+      const total = mode === "practice" ? 25 : 30;
+      selectedQuestions = [...questions]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, total);
+      currentQuestion = 0;
+      score = 0;
+
+      if (mode === "exam") {
+        startTimer(45 * 60);
+      }
+
+      showQuestion();
+    }
+
+    function showQuestion() {
+      if (currentQuestion >= selectedQuestions.length) {
+        endQuiz();
+        return;
+      }
+
+      const q = selectedQuestions[currentQuestion];
+      document.getElementById("q-number").textContent = `Question ${currentQuestion + 1} of ${selectedQuestions.length}`;
+      document.getElementById("question-box").textContent = q.question;
+
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      document.getElementById("explanation-box").style.display = "none";
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.textContent = opt;
+        btn.onclick = () => selectOption(i, btn);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function selectOption(index, button) {
+      const q = selectedQuestions[currentQuestion];
+      const allOptions = document.querySelectorAll(".option");
+
+      allOptions.forEach(btn => btn.onclick = null); // disable all after selection
+
+      if (index === q.answer) {
+        button.classList.add("correct");
+        score++;
+      } else {
+        button.classList.add("incorrect");
+        allOptions[q.answer].classList.add("correct");
+      }
+
+      if (currentMode === "practice") {
+        document.getElementById("explanation-box").style.display = "block";
+        document.getElementById("explanation-box").textContent = "Explanation: " + q.explanation;
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      showQuestion();
+    }
+
+    function endQuiz() {
+      clearInterval(timer);
+      document.querySelector("#app").style.display = "none";
+      document.querySelector("#result").style.display = "block";
+
+      const finalScore = currentMode === "exam" ? score * 2 : score;
+      const total = selectedQuestions.length * (currentMode === "exam" ? 2 : 1);
+      document.querySelector("#score").textContent = `Your Score: ${finalScore} / ${total}`;
+
+      if (currentMode === "exam") {
+        const answerReview = selectedQuestions.map((q, i) => {
+          return `Q${i + 1}: ${q.question}
+Correct Answer: ${q.options[q.answer]}
+Explanation: ${q.explanation}`;
+        }).join("\n\n");
+
+        const pre = document.createElement("pre");
+        pre.textContent = "\n\n" + answerReview;
+        document.querySelector("#result").appendChild(pre);
+      }
+    }
+
+    function startTimer(seconds) {
+      const interval = setInterval(() => {
+        seconds--;
+        if (seconds <= 0) {
+          clearInterval(interval);
+          endQuiz();
+        }
+      }, 1000);
+      timer = interval;
+    }
+  </script>
+</body>
+</html>
